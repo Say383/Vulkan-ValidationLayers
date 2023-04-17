@@ -351,6 +351,25 @@ static inline uint32_t GetPlaneIndex(VkImageAspectFlags aspect) {
     }
 }
 
+// vkspec.html#formats-planes-image-aspect
+static inline bool IsValidPlaneAspect(VkFormat format, VkImageAspectFlags aspect_mask) {
+    const uint32_t planes = FormatPlaneCount(format);
+    constexpr VkImageAspectFlags valid_planes =
+        VK_IMAGE_ASPECT_PLANE_0_BIT | VK_IMAGE_ASPECT_PLANE_1_BIT | VK_IMAGE_ASPECT_PLANE_2_BIT;
+
+    if (((aspect_mask & valid_planes) == aspect_mask) && (aspect_mask != 0)) {
+        if ((planes == 3) || ((planes == 2) && ((aspect_mask & VK_IMAGE_ASPECT_PLANE_2_BIT) == 0))) {
+            return true;
+        }
+    }
+    return false;  // Expects calls to make sure it is a multi-planar format
+}
+
+static inline bool IsOnlyOneValidPlaneAspect(VkFormat format, VkImageAspectFlags aspect_mask) {
+    const bool multiple_bits = aspect_mask != 0 && !IsPowerOfTwo(aspect_mask);
+    return !multiple_bits && IsValidPlaneAspect(format, aspect_mask);
+}
+
 // all "advanced blend operation" found in spec
 static inline bool IsAdvanceBlendOperation(const VkBlendOp blend_op) {
     return (static_cast<int>(blend_op) >= VK_BLEND_OP_ZERO_EXT) && (static_cast<int>(blend_op) <= VK_BLEND_OP_BLUE_EXT);
@@ -370,6 +389,8 @@ static inline bool IsBetweenInclusive(VkDeviceSize value, VkDeviceSize min, VkDe
 static inline bool IsBetweenInclusive(const VkExtent2D &value, const VkExtent2D &min, const VkExtent2D &max) {
     return IsBetweenInclusive(value.width, min.width, max.width) && IsBetweenInclusive(value.height, min.height, max.height);
 }
+
+static inline bool IsBetweenInclusive(float value, float min, float max) { return (value >= min) && (value <= max); }
 
 // Check if value is integer multiple of granularity
 static inline bool IsIntegerMultipleOf(VkDeviceSize value, VkDeviceSize granularity) {

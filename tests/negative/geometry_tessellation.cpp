@@ -86,7 +86,7 @@ TEST_F(VkLayerTest, ValidateGeometryShaderEnabled) {
         helper.shader_stages_ = {vs.GetStageCreateInfo(), gs.GetStageCreateInfo(), helper.fs_->GetStageCreateInfo()};
     };
 
-    constexpr std::array vuids = {"VUID-VkPipelineShaderStageCreateInfo-stage-00704", "VUID-VkShaderModuleCreateInfo-pCode-01091"};
+    constexpr std::array vuids = {"VUID-VkPipelineShaderStageCreateInfo-stage-00704", "VUID-VkShaderModuleCreateInfo-pCode-08740"};
     CreatePipelineHelper::OneshotTest(*this, set_info, kErrorBit, vuids);
 }
 
@@ -139,8 +139,8 @@ TEST_F(VkLayerTest, ValidateTessellationShaderEnabled) {
         helper.shader_stages_.emplace_back(tcs.GetStageCreateInfo());
         helper.shader_stages_.emplace_back(tes.GetStageCreateInfo());
     };
-    constexpr std::array vuids = {"VUID-VkPipelineShaderStageCreateInfo-stage-00705", "VUID-VkShaderModuleCreateInfo-pCode-01091",
-                                  "VUID-VkShaderModuleCreateInfo-pCode-01091",
+    constexpr std::array vuids = {"VUID-VkPipelineShaderStageCreateInfo-stage-00705", "VUID-VkShaderModuleCreateInfo-pCode-08740",
+                                  "VUID-VkShaderModuleCreateInfo-pCode-08740",
                                   "VUID-VkPipelineInputAssemblyStateCreateInfo-topology-00430"};
     CreatePipelineHelper::OneshotTest(*this, set_info, kErrorBit, vuids);
 }
@@ -710,7 +710,7 @@ TEST_F(VkLayerTest, CreatePipelineExceedMaxGeometryInputOutputComponents) {
 
         VkShaderObj gs(this, gsSourceStr.c_str(), VK_SHADER_STAGE_GEOMETRY_BIT);
 
-        m_errorMonitor->SetUnexpectedError("UNASSIGNED-CoreValidation-Shader-MissingOutput");
+        m_errorMonitor->SetUnexpectedError("VUID-RuntimeSpirv-OpEntryPoint-08743");
 
         const auto set_info = [&](CreatePipelineHelper &helper) {
             helper.shader_stages_ = {helper.vs_->GetStageCreateInfo(), gs.GetStageCreateInfo(), helper.fs_->GetStageCreateInfo()};

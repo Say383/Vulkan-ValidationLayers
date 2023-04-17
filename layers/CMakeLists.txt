@@ -158,31 +158,31 @@ target_sources(VkLayer_khronos_validation PRIVATE
     containers/sparse_containers.h
     containers/subresource_adapter.cpp
     containers/subresource_adapter.h
-    core_checks/android_validation.cpp
-    core_checks/buffer_validation.cpp
-    core_checks/buffer_address_validation.h
-    core_checks/cmd_buffer_dynamic_validation.cpp
-    core_checks/cmd_buffer_validation.cpp
-    core_checks/copy_blit_resolve_validation.cpp
+    core_checks/android_cc_validation.cpp
+    core_checks/buffer_cc_validation.cpp
+    core_checks/buffer_address_cc_validation.h
+    core_checks/cmd_buffer_dynamic_cc_validation.cpp
+    core_checks/cmd_buffer_cc_validation.cpp
+    core_checks/copy_blit_resolve_cc_validation.cpp
     core_checks/core_validation.h
-    core_checks/descriptor_validation.cpp
-    core_checks/device_validation.cpp
-    core_checks/device_memory_validation.cpp
-    core_checks/drawdispatch_validation.cpp
-    core_checks/external_object_validation.cpp
-    core_checks/image_validation.cpp
-    core_checks/image_layout_validation.cpp
-    core_checks/pipeline_validation.cpp
-    core_checks/query_validation.cpp
-    core_checks/queue_validation.cpp
-    core_checks/ray_tracing_validation.cpp
-    core_checks/render_pass_validation.cpp
-    core_checks/shader_validation.cpp
-    core_checks/shader_validation.h
-    core_checks/synchronization_validation.cpp
-    core_checks/video_validation.cpp
-    core_checks/wsi_validation.cpp
-    core_checks/ycbcr_validation.cpp
+    core_checks/descriptor_cc_validation.cpp
+    core_checks/device_cc_validation.cpp
+    core_checks/device_memory_cc_validation.cpp
+    core_checks/drawdispatch_cc_validation.cpp
+    core_checks/external_object_cc_validation.cpp
+    core_checks/image_cc_validation.cpp
+    core_checks/image_layout_cc_validation.cpp
+    core_checks/pipeline_cc_validation.cpp
+    core_checks/query_cc_validation.cpp
+    core_checks/queue_cc_validation.cpp
+    core_checks/ray_tracing_cc_validation.cpp
+    core_checks/render_pass_cc_validation.cpp
+    core_checks/shader_cc_validation.cpp
+    core_checks/shader_cc_validation.h
+    core_checks/synchronization_cc_validation.cpp
+    core_checks/video_cc_validation.cpp
+    core_checks/wsi_cc_validation.cpp
+    core_checks/ycbcr_cc_validation.cpp
     error_message/core_error_location.cpp
     error_message/core_error_location.h
     error_message/validation_error_enums.h
@@ -251,7 +251,20 @@ target_sources(VkLayer_khronos_validation PRIVATE
     state_tracker/state_tracker.h
     state_tracker/video_session_state.cpp
     state_tracker/video_session_state.h
-    stateless/parameter_validation_utils.cpp
+    stateless/buffer_sl_validation.cpp
+    stateless/cmd_buffer_dynamic_sl_validation.cpp
+    stateless/cmd_buffer_sl_validation.cpp
+    stateless/descriptor_sl_validation.cpp
+    stateless/device_memory_sl_validation.cpp
+    stateless/external_object_sl_validation.cpp
+    stateless/framebuffer_sl_validation.cpp
+    stateless/image_sl_validation.cpp
+    stateless/instance_device_sl_validation.cpp
+    stateless/pipeline_sl_validation.cpp
+    stateless/ray_tracing_sl_validation.cpp
+    stateless/render_pass_sl_validation.cpp
+    stateless/synchronization_sl_validation.cpp
+    stateless/wsi_sl_validation.cpp
     stateless/stateless_validation.h
     sync/sync_validation.cpp
     sync/sync_validation.h
